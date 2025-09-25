@@ -19,7 +19,7 @@ class Config:
     CORS_ORIGINS = os.getenv("CORS_ORIGINS")
 
 class DevelopmentConfig(Config):
-    pass 
+    DEBUG = True
 
 class ProductionConfig(Config):
-    pass
+     DEBUG = False
