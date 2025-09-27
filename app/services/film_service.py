@@ -21,3 +21,19 @@ def top_5_rented_films():
 
     return [{"film_id": fid, "title": title, "rentals": int(count)} for fid, title, count in q] 
 
+''' Return details for a single film '''
+def film_detail(film_id: int):
+    session = get_session()
+    film = models["film"]
+    f = session.get(film, film_id)
+    if not f: 
+        return None; 
+    return {
+        "film_id": f.film_id,
+        "title": f.title,
+        "description": f.description,
+        "release_year": f.release_year,
+        "length": f.length,
+        "rating": f.rating,
+        "rental_rate": float(f.rental_rate),
+    }

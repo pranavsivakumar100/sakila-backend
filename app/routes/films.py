@@ -11,4 +11,16 @@ bp = Blueprint("films", __name__)
 def top_films():
     return jsonify(film_service.top_5_rented_films())
 
+'''
+    GET /api/films/<film_id>
+    Returns details for a single film.
+'''
+@bp.get("/<int:film_id>")
+def film_detail(film_id: int):
+    film = film_service.film_detail(film_id)
+    if not film:
+        return {"error": "Film not found"}, 404
+    return jsonify(film)
+
+
 
