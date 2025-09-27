@@ -5,7 +5,7 @@ bp = Blueprint("actors", __name__)
 
 '''
     GET /api/actors/<actor_id>
-    Returns basic actor details.
+    Returns actor details.
 '''
 @bp.get("/<int:actor_id>")
 def get_actor(actor_id: int):
@@ -22,3 +22,10 @@ def get_actor(actor_id: int):
 def top_actors():
     return jsonify(actor_service.top_5_actors())
 
+'''
+    GET /api/actors/<actor_id>/top5films
+    Returns top 5 most rented films for an actor
+'''
+@bp.get("/<int:actor_id>/top5films")
+def actor_top_films(actor_id: int):
+    return jsonify(actor_service.actor_top_5_rented_films(actor_id))

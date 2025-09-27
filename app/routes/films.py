@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from ..services import film_service
 
 bp = Blueprint("films", __name__)
@@ -22,5 +22,38 @@ def film_detail(film_id: int):
         return {"error": "Film not found"}, 404
     return jsonify(film)
 
+'''
+    GET /api/films/search/title?q=<search_term>
+    Search films by title.
+'''
+@bp.get("/search/title")
+def search_films_by_title():
+    search_term = request.args.get('q', '')
+    if not search_term:
+        return {"error": "Search term is required"}, 400
+    results = film_service.search_films_by_title(search_term)
+    return jsonify(results)
+    
+'''
+    GET /api/films/search/actor?q=<search_term>
+    Search films by actor name.
+'''
+@bp.get("/search/actor")
+def search_films_by_actor():
+    search_term = request.args.get('q', '')
+    if not search_term:
+        return {"error": "Search term is required"}, 400
+    results = film_service.search_films_by_actor(search_term)
+    return jsonify(results)
 
-
+'''
+    GET /api/films/search/genre?q=<search_term>
+    Search films by genre.
+'''
+@bp.get("/search/genre")
+def search_films_by_genre():
+    search_term = request.args.get('q', '')
+    if not search_term:
+        return {"error": "Search term is required"}, 400
+    results = film_service.search_films_by_genre(search_term)
+    return jsonify(results)
