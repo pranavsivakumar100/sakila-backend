@@ -18,6 +18,9 @@ class Config:
     # CORS since frontend and backend are two different ports during development
     CORS_ORIGINS = os.getenv("CORS_ORIGINS")
 
+    # For user authentication
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
 class DevelopmentConfig(Config):
     DEBUG = True
 

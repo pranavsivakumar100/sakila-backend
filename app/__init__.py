@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from .db import init_db
 from .config import DevelopmentConfig # CHANGE to ProductionConfig when deploying
-from .routes import films, actors, rentals
+from .routes import films, actors, rentals, auth
 
 def create_app(config_class=DevelopmentConfig):
     # Create Flask application instance
@@ -21,6 +21,7 @@ def create_app(config_class=DevelopmentConfig):
     app.register_blueprint(films.bp, url_prefix="/api/films")
     app.register_blueprint(actors.bp, url_prefix="/api/actors")
     app.register_blueprint(rentals.bp, url_prefix="/api/rentals")
+    app.register_blueprint(auth.bp, url_prefix="/api/auth")
 
     # Health check
     @app.get("/api/health")
