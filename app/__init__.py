@@ -13,7 +13,7 @@ def create_app(config_class=DevelopmentConfig):
 
     # Enable CORS
     CORS(app, origins=app.config["CORS_ORIGINS"], supports_credentials=True) 
-
+    
     # Initialize database
     init_db(app) 
 

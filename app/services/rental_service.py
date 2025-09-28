@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import and_
 
 ''' Create a new rental for a customer '''
-def create_rental(customer_id: int, film_id: int, staff_id: int = 1):
+def create_rental(customer_id: int, film_id: int, staff_id: int):
     session = get_session()
     rental, inventory, customer, film = models["rental"], models["inventory"], models["customer"], models["film"]
     

@@ -15,8 +15,8 @@ class Config:
     # Docs told me to do this to reduce overhead since Flask-SQLAlchemy inherently tracks changes to DB models and emits signals
     SQLALCHEMY_TRACK_MODIFICATIONS = False 
 
-    # CORS since frontend and backend are two different ports during development
-    CORS_ORIGINS = os.getenv("CORS_ORIGINS")
+    # CORS
+    CORS_ORIGINS = os.getenv("CORS_ORIGINS", "").split(",") if os.getenv("CORS_ORIGINS") else []
 
     # For user authentication
     SECRET_KEY = os.getenv('SECRET_KEY')
@@ -25,4 +25,4 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 class ProductionConfig(Config):
-     DEBUG = False
+    DEBUG = False
